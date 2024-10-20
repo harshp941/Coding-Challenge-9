@@ -21,3 +21,31 @@ set isAvailable(value) {
     this._isAvailable= value;
 }
 }
+
+//Task 2 Create a Section class
+ class Section {
+    constructor(name) {
+        this.name= name;
+        this.books = [];
+    }
+
+    addBook(book) {
+        this.books.push(book);
+    }
+
+    getAvailableBooks() {
+        return this.books.filter(book => book.isAvailable.length);
+    }
+
+    listBooks() {
+        return this.books.map(book => ({
+            title: book.title,
+            isAvailable: book.isAvailable,
+        }));
+    }
+
+    calculateTotalBooksAvailable() {
+        return this.getAvailableBooks();
+    }
+ }
+ 
