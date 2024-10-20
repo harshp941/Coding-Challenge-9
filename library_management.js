@@ -43,9 +43,32 @@ set isAvailable(value) {
             isAvailable: book.isAvailable,
         }));
     }
-
+// This is Task 5
     calculateTotalBooksAvailable() {
         return this.getAvailableBooks();
     }
  }
- 
+
+ class Patron {
+    constructor(name){
+        this.name = name;
+        this.borrowedBooks = [];
+    }
+
+    borrowBook(book) {
+        if (book.isAvailable) {
+            book.isAvailable = false;
+            this.borrowedBooks.push(book);
+        }
+    }
+
+    returnBook(book) {
+        let index = this.borrowedBooks.indexOf(book);
+        if (index!== -1) {
+            book.isAvailable = true;
+            this.borrowedBooks.splice(index,1);
+        }
+    }
+ }
+
+ class VIPPatron 
