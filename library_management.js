@@ -34,7 +34,7 @@ set isAvailable(value) {
     }
 
     getAvailableBooks() {
-        return this.books.filter(book => book.isAvailable.length);
+        return this.books.filter(book => book.isAvailable).length;
     }
 
     listBooks() {
@@ -63,10 +63,10 @@ set isAvailable(value) {
     }
 
     returnBook(book) {
-        let index = this.borrowedBooks.indexOf(book);
-        if (index!== -1) {
+        let findBook = this.borrowedBooks.find(b => b === book);
+        if (findBook) {
             book.isAvailable = true;
-            this.borrowedBooks.splice(index,1);
+            this.borrowedBooks = this.borrowedBooks.filter(b => b !== book)
         }
     }
  }
@@ -85,4 +85,26 @@ set isAvailable(value) {
         }
     }
  }
- 
+
+// Task 6 Create and Manage Sections and Patrons
+const fiction = new Section("Fiction");
+const nonfiction = new Section("Non Fiction");
+
+const book1 = new Book("1984", "George Orwell", "123456789");
+const book2 = new Book("Brave New World", "Aldous Huxley", "987654321");
+const book3 = new Book("The Cat in the Hat", "Dr.Seuss", "543216789");
+
+fiction.addBook(book1);
+fiction.addBook(book2);
+nonfiction.addBook(book3);
+
+const patron1 = new Patron("Gabe");
+const vipPatron = new VIPPatron("Tom");
+
+patron1.borrowBook(book1); // Gabe borrows 1984
+vipPatron.borrowBook(book2); // Tom (VIP) borrows Brave New World
+
+patron1.returnBook(book1); // Gabe returns 1984
+
+console.log(`Available books in Fiction: ${fiction.calculateTotalBooksAvailable()}`);
+console.log(`Available books in Non-Fiction: ${nonfiction.calculateTotalBooksAvailable()}`);
