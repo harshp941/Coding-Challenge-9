@@ -48,7 +48,7 @@ set isAvailable(value) {
         return this.getAvailableBooks();
     }
  }
-
+// Task 3 Create a Patron Class
  class Patron {
     constructor(name){
         this.name = name;
@@ -71,4 +71,18 @@ set isAvailable(value) {
     }
  }
 
- class VIPPatron 
+ //Task 4 Create a VIPPatron Class that inherits from Patron
+ class VIPPatron extends Patron{
+    constructor(name) {
+        super(name);
+        this.priority = true;
+    }
+
+    borrowBook(book) {
+        if (book.isAvailable) {
+            book.isAvailable = false;
+            this.borrowedBooks.push(book);
+        }
+    }
+ }
+ 
